@@ -7,11 +7,11 @@ var cookieExpirationDays = 30;
 
 // Define the mapping of specific URL parameters to custom cookie names.
 var specificParameters = {
-  'utm_medium': 'channel',
+    'utm_medium': 'channel',
   'utm_source': 'program',
   'utm_campaign': 'campaign',
-  'utm_content': 'tactic',
-  'utm_term': 'term',
+  'utm_content': 'strategy',
+  'utm_term': 'tactic',
   'ref': 'ref'
 };
 
