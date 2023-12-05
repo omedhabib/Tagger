@@ -10,8 +10,8 @@ var specificParameters = {
   'utm_medium': 'channel',
   'utm_source': 'program',
   'utm_campaign': 'campaign',
-  'utm_content': 'tactic',
-  'utm_term': 'term',
+  'utm_content': 'strategy',  
+  'utm_term': 'tactic',
   'ref': 'ref'
 };
 
