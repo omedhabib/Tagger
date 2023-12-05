@@ -7,11 +7,11 @@ var cookieExpirationDays = 30;
 
 // Define the mapping of specific URL parameters to custom cookie names.
 var specificParameters = {
-    'utm_medium': 'channel',
+  'utm_medium': 'channel',
   'utm_source': 'program',
   'utm_campaign': 'campaign',
-  'utm_content': 'strategy',
-  'utm_term': 'tactic',
+  'utm_content': 'tactic',
+  'utm_term': 'term',
   'ref': 'ref'
 };
 
@@ -42,6 +42,18 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
+// Function to get a cookie value.
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 // Capture URL parameters and set them as cookies with custom names.
 var params = getURLParameters(window.location.href);
 for (var key in specificParameters) {
@@ -59,6 +71,7 @@ function insertHiddenFields() {
       var hiddenInput = document.createElement('input');
       hiddenInput.type = 'hidden';
       hiddenInput.name = specificParameters[key];
+      hiddenInput.value = getCookie(specificParameters[key]); // Set value from cookie
       form.appendChild(hiddenInput);
     }
     
@@ -92,7 +105,9 @@ function getUserIP() {
 }
 
 // Insert hidden fields and retrieve the user's IP when the page loads.
-insertHiddenFields();
-getUserIP();
-  
-</script>  
+window.onload = function() {
+  insertHiddenFields();
+  getUserIP();
+};
+
+</script>
